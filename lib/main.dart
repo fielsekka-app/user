@@ -159,70 +159,160 @@ class ResponsiveWebWrapper extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     if (width > 600) {
+      final currentUrl = Uri.base.toString();
+      final qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=0F0F11&bgcolor=FFFFFF&data=${Uri.encodeComponent(currentUrl)}';
+
       return Scaffold(
-        backgroundColor: const Color(0xFF0F0F11),
-        body: Stack(
-          children: [
-            // Top Banner
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
-                color: const Color(0xFF1E1E24),
-                child: SafeArea(
-                  bottom: false,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.phone_iphone, color: Color(0xFFCCFF00), size: 22),
-                      const SizedBox(width: 12),
-                      Flexible(
-                        child: Text(
-                          'نسخة التطبيق متاحة على الموبايل. للتجربة الكاملة يرجى فتح الرابط من الهاتف.',
-                          textAlign: TextAlign.center,
-                          textDirection: TextDirection.rtl,
-                          style: GoogleFonts.cairo(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: RadialGradient(
+              colors: [
+                Color(0xFF1E1E24),
+                Color(0xFF0F0F11),
+              ],
+              radius: 1.2,
+              center: Alignment.center,
             ),
-            // Centered Mobile Mockup Frame
-            Center(
+          ),
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
               child: Container(
-                margin: const EdgeInsets.only(top: 80, bottom: 40),
-                width: 375,
-                height: 812,
+                constraints: const BoxConstraints(maxWidth: 480),
+                padding: const EdgeInsets.all(32.0),
                 decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(40),
-                  border: Border.all(color: const Color(0xFF2C2C35), width: 12),
+                  color: const Color(0xFF18181C),
+                  borderRadius: BorderRadius.circular(28),
+                  border: Border.all(
+                    color: const Color(0xFF2C2C35),
+                    width: 1.5,
+                  ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.6),
-                      blurRadius: 40,
-                      spreadRadius: 5,
+                      color: Colors.black.withOpacity(0.4),
+                      blurRadius: 30,
+                      offset: const Offset(0, 15),
                     ),
                   ],
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(28),
-                  child: child,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFCCFF00).withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.phone_android_rounded,
+                        color: Color(0xFFCCFF00),
+                        size: 48,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'التطبيق متاح للهواتف المحمولة فقط',
+                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.rtl,
+                      style: GoogleFonts.cairo(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'نسخة الويب من تطبيق «في السكة» مهيأة للعمل بالكامل على شاشات الهواتف الذكية فقط. يرجى مسح رمز الاستجابة السريعة (QR Code) أدناه لفتح التطبيق على هاتفك، أو إعادة فتح الرابط من متصفح الجوال.',
+                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.rtl,
+                      style: GoogleFonts.cairo(
+                        color: const Color(0xFF8F8F9E),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        height: 1.6,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFCCFF00).withOpacity(0.15),
+                            blurRadius: 20,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          qrUrl,
+                          width: 180,
+                          height: 180,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              width: 180,
+                              height: 180,
+                              color: const Color(0xFFF4F4F6),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.qr_code_2_rounded, size: 48, color: Colors.grey),
+                                  SizedBox(height: 8),
+                                  Text('QR Code', style: TextStyle(color: Colors.grey)),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E1E24),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          color: const Color(0xFF2C2C35),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.info_outline_rounded,
+                            color: Color(0xFFCCFF00),
+                            size: 16,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            currentUrl.replaceAll('http://', '').replaceAll('https://', '').split('/').first,
+                            style: GoogleFonts.cairo(
+                              color: const Color(0xFF8F8F9E),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
+          ),
         ),
       );
     }
+
     return child;
   }
 }
