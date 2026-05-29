@@ -207,7 +207,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
               _emailSent = false;
             });
           },
-          child: Text(
+          child: const Text(
             "إعادة إرسال الرابط",
             style: TextStyle(
               color: AppTheme.textSecondary,

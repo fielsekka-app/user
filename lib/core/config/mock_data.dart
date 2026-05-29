@@ -11,9 +11,6 @@ import 'package:fielsekkia_user/features/home/data/models/schedule_model.dart';
 import 'package:fielsekkia_user/features/booking/domain/entities/schedule_entity.dart';
 import 'package:fielsekkia_user/features/home/data/models/university_boarding_point_model.dart';
 import 'package:fielsekkia_user/features/home/data/models/university_arrival_point_model.dart';
-import 'package:fielsekkia_user/features/booking/data/models/booking_model.dart';
-import 'package:fielsekkia_user/features/booking/domain/entities/booking_entity.dart';
-import 'package:fielsekkia_user/features/subscription/domain/entities/subscription_entity.dart';
 
 class MockData {
   // Current user state

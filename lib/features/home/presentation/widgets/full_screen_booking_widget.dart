@@ -6,7 +6,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:fielsekkia_user/core/utils/digit_converter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../booking/presentation/providers/booking_provider.dart';
@@ -53,8 +52,6 @@ class _FullScreenBookingViewState extends ConsumerState<FullScreenBookingView>
   int _passengerCount = 1;
   bool _splitPreference = true;
   late DateTime _selectedDate;
-  late DateTime _currentMonth;
-  late ScrollController _dateScrollController;
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
@@ -66,7 +63,6 @@ class _FullScreenBookingViewState extends ConsumerState<FullScreenBookingView>
   void initState() {
     super.initState();
     _selectedDate = widget.initialDate;
-    _currentMonth = DateTime(widget.initialDate.year, widget.initialDate.month);
 
     // Setup animations
     _animationController = AnimationController(
@@ -230,12 +226,8 @@ class _FullScreenBookingViewState extends ConsumerState<FullScreenBookingView>
     super.dispose();
   }
 
-  bool _isSameDay(DateTime a, DateTime b) {
-    return a.year == b.year && a.month == b.month && a.day == b.day;
-  }
-
   Widget _buildCalendarGrid() {
-    List<CalendarEvent> events = [];
+    final List<CalendarEvent> events = [];
     
     // Add events for schedules
     widget.schedules.forEach((dateString, schedule) {
@@ -661,10 +653,10 @@ class _BookingCardItem extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 16),
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [const Color(0xFF1A1A1A), const Color(0xFF0D0D0D)],
+                colors: [Color(0xFF1A1A1A), Color(0xFF0D0D0D)],
               ),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
@@ -764,7 +756,7 @@ class _BookingCardItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Icon(
+                    const Icon(
                       CupertinoIcons.arrow_right,
                       size: 16,
                       color: AppTheme.primaryColor,

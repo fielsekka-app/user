@@ -98,13 +98,13 @@ class _SchedulingPageState extends ConsumerState<SchedulingPage> {
                       color: AppTheme.errorColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.warning_amber_rounded,
                           color: AppTheme.errorColor,
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Expanded(
                           child: Text(
                             "الحجز في نفس اليوم متاح بس قبل الساعة 7 الصبح.",
@@ -162,14 +162,14 @@ class _SchedulingPageState extends ConsumerState<SchedulingPage> {
                         // Show success notification
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Row(
+                            content: const Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.check_circle_outline,
                                   color: Colors.white,
                                 ),
-                                const SizedBox(width: 12),
-                                const Text('تم تحديد المواعيد بنجاح'),
+                                SizedBox(width: 12),
+                                Text('تم تحديد المواعيد بنجاح'),
                               ],
                             ),
                             backgroundColor: AppTheme.primaryColor,

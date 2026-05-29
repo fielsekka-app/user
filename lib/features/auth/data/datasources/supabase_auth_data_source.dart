@@ -13,6 +13,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   SupabaseAuthDataSource(this._client);
 
   /// Sign up a new user with email and password
+  @override
   Future<UserModel> signUp({
     required String email,
     required String password,
@@ -126,6 +127,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Sign in an existing user with email and password
+  @override
   Future<UserModel> signIn({
     required String email,
     required String password,
@@ -177,6 +179,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Sign out the current user
+  @override
   Future<void> signOut() async {
     try {
       await _client.auth.signOut();
@@ -188,6 +191,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Get the currently authenticated user
+  @override
   Future<UserModel?> getCurrentUser() async {
     try {
       final session = _client.auth.currentSession;
@@ -224,6 +228,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Stream of authentication state changes
+  @override
   Stream<UserModel?> authStateChanges() {
     return _client.auth.onAuthStateChange.asyncExpand((data) async* {
       final session = data.session;
@@ -282,6 +287,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Verify OTP code
+  @override
   Future<UserModel> verifyOtp({
     required String email,
     required String otp,
@@ -329,6 +335,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Resend OTP code
+  @override
   Future<void> resendOtp({required String email}) async {
     try {
       await _client.auth.resend(type: OtpType.signup, email: email);
@@ -340,6 +347,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Send password reset email
+  @override
   Future<void> resetPassword({required String email}) async {
     try {
       await _client.auth.resetPasswordForEmail(email);
@@ -351,6 +359,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Update user profile
+  @override
   Future<UserModel> updateProfile({
     required String userId,
     required String fullName,
@@ -395,6 +404,7 @@ class SupabaseAuthDataSource implements AuthDataSource {
   }
 
   /// Upload profile image
+  @override
   Future<String> uploadProfileImage({
     required File image,
     required String userId,

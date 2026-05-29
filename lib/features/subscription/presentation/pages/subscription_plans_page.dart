@@ -103,7 +103,7 @@ class _SubscriptionPlansPageState extends ConsumerState<SubscriptionPlansPage> {
                         color: AppTheme.primaryColor.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         CupertinoIcons.star_fill,
                         color: AppTheme.primaryColor,
                         size: 32,
@@ -330,7 +330,7 @@ class _SubscriptionPlansPageState extends ConsumerState<SubscriptionPlansPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                     child: Text(
                       '–',
@@ -338,7 +338,7 @@ class _SubscriptionPlansPageState extends ConsumerState<SubscriptionPlansPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                     child: Icon(
                       CupertinoIcons.checkmark_alt,

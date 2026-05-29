@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import '../config/supabase_config.dart';
-import '../config/env.dart';
 import '../services/logger_service.dart';
 
 /// Provider that handles all app-wide initialization synchronously

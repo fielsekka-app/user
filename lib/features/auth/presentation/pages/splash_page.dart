@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/services/secure_storage_service.dart';
-import '../../../../core/widgets/auth_wrapper.dart';
 import 'onboarding_page.dart';
 
 class SplashPage extends ConsumerStatefulWidget {

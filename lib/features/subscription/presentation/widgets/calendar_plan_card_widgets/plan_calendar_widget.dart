@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:fielsekkia_user/core/utils/digit_converter.dart';
 import '../../../../../core/theme/app_theme.dart';
 import '../../../../../core/widgets/unified_calendar.dart';
 
@@ -32,10 +30,6 @@ class _PlanCalendarViewState extends State<PlanCalendarView> {
   void initState() {
     super.initState();
     _currentMonth = widget.startDate;
-  }
-
-  bool _isSameDay(DateTime a, DateTime b) {
-    return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
   @override

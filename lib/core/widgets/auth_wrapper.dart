@@ -13,7 +13,7 @@ class AuthWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Activate the session validator to handle background account deletions
-    ref.listen(userSessionValidatorProvider, (_, __) {});
+    ref.listen(userSessionValidatorProvider, (_, _) {});
 
     final authState = ref.watch(authProvider);
 

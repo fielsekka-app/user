@@ -206,12 +206,11 @@ class _UnifiedCalendarWidgetState extends State<UnifiedCalendarWidget> {
               final now = DateTime.now();
               final monthDate = DateTime(now.year, now.month + monthOffset, 1);
               final daysInMonth = DateUtils.getDaysInMonth(monthDate.year, monthDate.month);
-              final firstDayOffset = monthDate.weekday % 7; // Sunday = 0, Monday = 1 ... Saturday = 6 (adjust based on locale, Arabic week starts Sat, so Sat=0)
               
               // In Dart, weekday: 1=Mon, 2=Tue, ... 7=Sun
               // Arabic week starts on Saturday. Let's map it:
               // Mon=1 -> 2, Tue=2 -> 3, Wed=3 -> 4, Thu=4 -> 5, Fri=5 -> 6, Sat=6 -> 0, Sun=7 -> 1
-              int mappedOffset = (monthDate.weekday + 1) % 7;
+              final int mappedOffset = (monthDate.weekday + 1) % 7;
 
               return GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

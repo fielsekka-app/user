@@ -134,7 +134,7 @@ class _SubscriptionPlansSheetState
                 }
 
                 // Determine plan type
-                SubscriptionPlanType planType = plan['title'] == 'باقة الشهر'
+                final SubscriptionPlanType planType = plan['title'] == 'باقة الشهر'
                     ? SubscriptionPlanType.monthly
                     : SubscriptionPlanType.semester;
 

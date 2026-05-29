@@ -512,13 +512,13 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage>
   Widget _buildTicketDashedLine() {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 10,
           height: 20,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: const Color(0xFFFAFAFA),
-              borderRadius: const BorderRadius.only(
+              color: Color(0xFFFAFAFA),
+              borderRadius: BorderRadius.only(
                 topRight: Radius.circular(10),
                 bottomRight: Radius.circular(10),
               ),
@@ -545,13 +545,13 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage>
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
           height: 20,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: const Color(0xFFFAFAFA),
-              borderRadius: const BorderRadius.only(
+              color: Color(0xFFFAFAFA),
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
               ),

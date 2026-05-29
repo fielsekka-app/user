@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fielsekkia_user/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:fielsekkia_user/core/utils/digit_converter.dart';
 
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/ios_components.dart';
@@ -555,11 +554,11 @@ class _BookingPageState extends ConsumerState<BookingPage> {
     BookingStateModel state, {
     bool isLadies = false,
   }) {
-    String pickupName = state.isToUniversity
+    final String pickupName = state.isToUniversity
         ? (state.selectedUniBoardingPoint?.nameAr ?? state.selectedCity?.nameAr ?? '-')
         : (state.selectedStation?.nameAr ?? '-');
 
-    String destinationName = state.isToUniversity
+    final String destinationName = state.isToUniversity
         ? (state.selectedUniArrivalPoint?.nameAr ?? state.selectedUniversity?.nameAr ?? 'الجامعة')
         : (state.selectedArrivalStation?.nameAr ?? 'موقف الوصول');
 
@@ -730,7 +729,7 @@ class _BookingPageState extends ConsumerState<BookingPage> {
     BookingState notifier,
     WidgetRef ref,
   ) {
-    bool isLadies = state.isLadiesOnly;
+    final bool isLadies = state.isLadiesOnly;
     return ClipRRect(
       borderRadius: BorderRadius.circular(28),
       child: Stack(
@@ -1005,10 +1004,12 @@ class _BookingPageState extends ConsumerState<BookingPage> {
                   onChanged: (val) {
                     notifier.selectTripType(val as TripType);
                     // Clear times when changing direction
-                    if (val == TripType.departureOnly)
+                    if (val == TripType.departureOnly) {
                       notifier.selectReturnTime(null);
-                    if (val == TripType.returnOnly)
+                    }
+                    if (val == TripType.returnOnly) {
                       notifier.selectDepartureTime(null);
+                    }
                   },
                 ),
               ],
@@ -1174,7 +1175,7 @@ class _BookingPageState extends ConsumerState<BookingPage> {
       ),
       child: Row(
         children: options.map((opt) {
-          bool isSelected = opt['value'] == currentValue;
+          final bool isSelected = opt['value'] == currentValue;
           return Expanded(
             child: GestureDetector(
               onTap: () => onChanged(opt['value']),

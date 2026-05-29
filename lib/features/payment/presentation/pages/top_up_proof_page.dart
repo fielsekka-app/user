@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/app_theme.dart';
 
-import '../../../../core/providers/storage_provider.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../../profile/presentation/providers/wallet_provider.dart';
 
@@ -405,7 +404,7 @@ class _TopUpProofPageState extends ConsumerState<TopUpProofPage>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'تحويل',
                   style: TextStyle(
                     fontSize: 16,
@@ -642,7 +641,7 @@ class _TopUpProofPageState extends ConsumerState<TopUpProofPage>
                         right: 10,
                         child: Container(
                           padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: AppTheme.primaryColor,
                             shape: BoxShape.circle,
                           ),
@@ -785,7 +784,7 @@ class _TopUpProofPageState extends ConsumerState<TopUpProofPage>
           child: Center(
             child: Text(
               step,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: AppTheme.primaryDark,
@@ -834,7 +833,7 @@ class _TopUpProofPageState extends ConsumerState<TopUpProofPage>
         width: double.infinity,
         height: 54,
         child: _isLoading
-            ? Center(
+            ? const Center(
                 child: SizedBox(
                   width: 28,
                   height: 28,

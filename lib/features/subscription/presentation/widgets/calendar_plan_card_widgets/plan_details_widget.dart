@@ -111,7 +111,7 @@ class PlanDetailsView extends StatelessWidget {
                   // Calendar Icon Button
                   GestureDetector(
                     onTap: onCalendarTap,
-                    child: Icon(
+                    child: const Icon(
                       CupertinoIcons.calendar,
                       color: AppTheme.primaryColor,
                       size: 28,
@@ -136,7 +136,7 @@ class PlanDetailsView extends StatelessWidget {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
+                  const Icon(
                     CupertinoIcons.checkmark_alt,
                     color: AppTheme.primaryColor,
                     size: 20,

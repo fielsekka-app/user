@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fielsekkia_user/l10n/app_localizations.dart';
 
 import 'core/theme/app_theme.dart';
-import 'core/widgets/auth_wrapper.dart';
 import 'core/providers/locale_provider.dart';
 import 'core/providers/app_startup_provider.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
@@ -189,7 +188,7 @@ class ResponsiveWebWrapper extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.4),
+                      color: Colors.black.withValues(alpha: 0.4),
                       blurRadius: 30,
                       offset: const Offset(0, 15),
                     ),
@@ -201,7 +200,7 @@ class ResponsiveWebWrapper extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFCCFF00).withOpacity(0.1),
+                        color: const Color(0xFFCCFF00).withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -242,7 +241,7 @@ class ResponsiveWebWrapper extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFFCCFF00).withOpacity(0.15),
+                            color: const Color(0xFFCCFF00).withValues(alpha: 0.15),
                             blurRadius: 20,
                             spreadRadius: 2,
                           ),

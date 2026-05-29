@@ -132,7 +132,7 @@ class DigitalTicket extends StatelessWidget {
                               // Date
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     CupertinoIcons.calendar,
                                     size: 16,
                                     color: AppTheme.textSecondary,

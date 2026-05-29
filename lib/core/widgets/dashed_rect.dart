@@ -61,8 +61,8 @@ class DashedRectPainter extends CustomPainter {
       Radius.circular(radius),
     );
 
-    Path path = Path()..addRRect(rrect);
-    Path dashPath = Path();
+    final Path path = Path()..addRRect(rrect);
+    final Path dashPath = Path();
 
     for (ui.PathMetric measurePath in path.computeMetrics()) {
       double distance = 0.0;

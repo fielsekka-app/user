@@ -283,7 +283,7 @@ class BookingState extends _$BookingState {
           state.selectedDepartureSchedule?.id ??
           state.selectedReturnSchedule?.id;
 
-      final result = await this.ref.read(createBookingUseCaseProvider)(
+      final result = await ref.read(createBookingUseCaseProvider)(
         cityId: state.selectedCity?.id,
         scheduleId: scheduleId,
         bookingDate: state.selectedDate,
@@ -319,8 +319,7 @@ class BookingState extends _$BookingState {
       final university = state.selectedUniversity!;
       final isCustom = university.id.startsWith('custom_');
 
-      final result = await this
-          .ref
+      final result = await ref
           .read(createUniversityRequestUseCaseProvider)(
         cityId: state.selectedCity?.id,
         bookingDate: state.selectedDate,
@@ -356,7 +355,7 @@ class BookingState extends _$BookingState {
   }) async {
     try {
       final result =
-          await this.ref.read(createRouteRequestUseCaseProvider)(
+          await ref.read(createRouteRequestUseCaseProvider)(
         cityId: state.selectedCity?.id,
         cityName: cityName,
         boardingStationName: boardingStationName,
@@ -378,7 +377,7 @@ class BookingState extends _$BookingState {
     }
 
     try {
-      final result = await this.ref.read(bookingRepositoryProvider).updateBooking(
+      final result = await ref.read(bookingRepositoryProvider).updateBooking(
         bookingId: bookingId,
         cityId: state.selectedCity?.id,
         bookingDate: state.selectedDate,

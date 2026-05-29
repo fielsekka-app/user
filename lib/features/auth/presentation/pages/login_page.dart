@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_input.dart';
@@ -166,7 +165,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   alignment: WrapAlignment.center,
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "معندكش حساب؟ ",
                       style: TextStyle(
                         color: AppTheme.textSecondary,
@@ -179,7 +178,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          CupertinoPageRoute(builder: (_) => SignupPage()),
+                          CupertinoPageRoute(builder: (_) => const SignupPage()),
                         );
                       },
                       style: TextButton.styleFrom(

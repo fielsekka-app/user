@@ -71,9 +71,9 @@ class _ScheduleSelectionPageState extends State<ScheduleSelectionPage> {
                 width: double.infinity,
                 child: CupertinoSlidingSegmentedControl<String>(
                   groupValue: selectedType,
-                  children: {
+                  children: const {
                     'departure': Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: EdgeInsets.symmetric(vertical: 8),
                       child: Text(
                         'ذهاب',
                         style: TextStyle(
@@ -83,7 +83,7 @@ class _ScheduleSelectionPageState extends State<ScheduleSelectionPage> {
                       ),
                     ),
                     'return': Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: EdgeInsets.symmetric(vertical: 8),
                       child: Text(
                         'عودة',
                         style: TextStyle(

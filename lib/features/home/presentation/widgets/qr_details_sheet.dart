@@ -98,8 +98,8 @@ class QRDetailsSheet extends ConsumerWidget {
         ? _formatTime(booking!.departureTime!) 
         : null;
 
-    final primaryColor = const Color(0xFFCCFF00); // Lime green for the badge
-    final ticketColor = const Color(0xFF1C1C1E);
+    const primaryColor = Color(0xFFCCFF00); // Lime green for the badge
+    const ticketColor = Color(0xFF1C1C1E);
 
     return Material(
       type: MaterialType.transparency,

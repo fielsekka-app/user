@@ -586,7 +586,7 @@ class MockWalletRepository implements WalletRepository {
   @override
   Future<Either<Failure, double>> deductAmount(String userId, double amount, String reason) async {
     if (MockData.walletBalance < amount) {
-      return Left(ServerFailure(message: 'رصيد غير كافي'));
+      return const Left(ServerFailure(message: 'رصيد غير كافي'));
     }
     MockData.walletBalance -= amount;
     MockData.walletTransactions.add({

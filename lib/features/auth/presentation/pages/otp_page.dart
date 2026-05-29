@@ -74,7 +74,7 @@ class OtpPage extends ConsumerWidget {
               Center(
                 child: CupertinoButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Resend Code",
                     style: TextStyle(
                       color: AppTheme.primaryColor,

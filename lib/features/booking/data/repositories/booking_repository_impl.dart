@@ -232,7 +232,7 @@ class BookingRepositoryImpl implements BookingRepository {
     required String universityId,
     required DateTime date,
   }) async {
-    return Left(
+    return const Left(
       ServerFailure(message: 'getSchedules via booking is not yet implemented'),
     );
   }
@@ -240,7 +240,7 @@ class BookingRepositoryImpl implements BookingRepository {
   @override
   Stream<List<BookingEntity>> watchUserBookings() {
     return Stream.error(
-      ServerFailure(message: 'Real-time booking updates are not yet implemented'),
+      const ServerFailure(message: 'Real-time booking updates are not yet implemented'),
     );
   }
 

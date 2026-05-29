@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/custom_button.dart';
@@ -174,7 +173,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "عندك حساب بالفعل؟ ",
                     style: TextStyle(
                       color: AppTheme.textSecondary,
@@ -187,7 +186,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            CupertinoPageRoute(builder: (_) => LoginPage()),
+                            CupertinoPageRoute(builder: (_) => const LoginPage()),
                           );
                         },
                     style: TextButton.styleFrom(

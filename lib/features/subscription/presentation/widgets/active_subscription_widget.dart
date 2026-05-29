@@ -55,7 +55,7 @@ class _ActiveSubscriptionViewState
                     color: AppTheme.primaryColor.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.ticket_fill,
                     size: 40,
                     color: AppTheme.primaryColor,

@@ -136,7 +136,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                           fit: BoxFit.cover,
                                           width: 48,
                                           height: 48,
-                                          placeholder: (_, __) => const Padding(
+                                          placeholder: (_, _) => const Padding(
                                             padding: EdgeInsets.all(8.0),
                                             child: Icon(
                                               CupertinoIcons.person_fill,
@@ -144,7 +144,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                               size: 24,
                                             ),
                                           ),
-                                          errorWidget: (_, __, ___) =>
+                                          errorWidget: (_, _, _) =>
                                               const Padding(
                                             padding: EdgeInsets.all(8.0),
                                             child: Icon(
@@ -228,7 +228,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                     );
                                   }
 
-                                  String sectionTitle = nearestBooking != null
+                                  final String sectionTitle = nearestBooking != null
                                       ? l10n.nextTrip
                                       : l10n.activeSubscription;
 
@@ -827,7 +827,7 @@ class _LocationSelectionDrawerState
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         CupertinoIcons.add,
                                         size: 20,
                                         color: AppTheme.textSecondary,
@@ -959,13 +959,7 @@ class _LocationSelectionDrawerState
         ? ref.watch(allUniversitiesProvider)
         : const AsyncValue.data(<UniversityEntity>[]);
     
-    final originsAsync = (!isToUniversity && selectedCity != null)
-        ? ref.watch(uniqueOriginsProvider(selectedCity!.id))
-        : const AsyncValue.data(<String>[]);
 
-    final availableDestinationsAsync = (!isToUniversity && selectedPickupStationName != null)
-        ? ref.watch(availableDestinationsProvider((originName: selectedPickupStationName!, cityId: selectedCity?.id)))
-        : const AsyncValue.data(<String>[]);
 
     final uniBoardingPointsAsync = (isToUniversity && selectedCity != null)
         ? ref.watch(universityBoardingPointsProvider(selectedCity!.id))
@@ -1315,7 +1309,7 @@ class _LocationSelectionDrawerState
                                                 textAlign: TextAlign.center,
                                               ),
                                               const SizedBox(height: 8),
-                                              Text(
+                                              const Text(
                                                 'أدخل تفاصيل المسار وسنتواصل معك فور توفره',
                                                 style: TextStyle(
                                                   color: AppTheme.textSecondary,
@@ -1673,7 +1667,7 @@ class _LocationSelectionDrawerState
                                   pickupStation: isToUniversity 
                                       ? null 
                                       : BoardingStationEntity(
-                                          id: 'virtual_${selectedPickupStationName}',
+                                          id: 'virtual_$selectedPickupStationName',
                                           nameAr: selectedPickupStationName!,
                                           nameEn: selectedPickupStationName!,
                                           cityId: selectedCity!.id,
@@ -1681,7 +1675,7 @@ class _LocationSelectionDrawerState
                                   arrivalStation: isToUniversity 
                                       ? null 
                                       : ArrivalStationEntity(
-                                          id: 'virtual_${selectedArrivalStationName}',
+                                          id: 'virtual_$selectedArrivalStationName',
                                           nameAr: selectedArrivalStationName!,
                                           nameEn: selectedArrivalStationName!,
                                           pickupStationId: '',

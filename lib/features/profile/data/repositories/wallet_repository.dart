@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/services/storage_service.dart';
-import '../../../../core/providers/storage_provider.dart';
 import '../../../../core/config/mock_data_sources.dart';
 
 abstract class WalletRepository {
@@ -55,7 +54,7 @@ class WalletRepositoryImpl implements WalletRepository {
       return Right(List<Map<String, dynamic>>.from(response));
     } catch (e) {
       AppLogger.error('❌ Error fetching transactions: $e');
-      return Left(ServerFailure(message: 'فشل في تحميل العمليات'));
+      return const Left(ServerFailure(message: 'فشل في تحميل العمليات'));
     }
   }
 
@@ -76,7 +75,7 @@ class WalletRepositoryImpl implements WalletRepository {
       return Right(balance);
     } catch (e) {
       AppLogger.error('❌ Error fetching balance: $e');
-      return Left(ServerFailure(message: 'فشل في تحميل الرصيد'));
+      return const Left(ServerFailure(message: 'فشل في تحميل الرصيد'));
     }
   }
 
@@ -104,7 +103,7 @@ class WalletRepositoryImpl implements WalletRepository {
     } catch (e) {
       AppLogger.error('❌ Error deducting amount via RPC: $e');
       if (e.toString().contains('رصيد غير كافي')) {
-        return Left(ServerFailure(message: 'رصيد غير كافي'));
+        return const Left(ServerFailure(message: 'رصيد غير كافي'));
       }
       return Left(ServerFailure(message: 'فشل في خصم المبلغ: $e'));
     }
@@ -150,7 +149,7 @@ class WalletRepositoryImpl implements WalletRepository {
 
       String proofImageUrl = '';
       if (imageFile != null && _storageService != null) {
-        proofImageUrl = await _storageService!.uploadPaymentProof(imageFile, userId);
+        proofImageUrl = await _storageService.uploadPaymentProof(imageFile, userId);
       }
 
       // 1. Insert ONLY into the new unified table 'wallet_requests'

@@ -341,7 +341,7 @@ class _SubscriptionConfirmationPageState
                                         ),
                                   ),
                                   const SizedBox(height: 8),
-                                  Icon(
+                                  const Icon(
                                     Icons.keyboard_arrow_down_rounded,
                                     color: AppTheme.textSecondary,
                                     size: 24,
