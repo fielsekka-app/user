@@ -8,10 +8,11 @@ import '../../domain/usecases/login_use_case.dart';
 import '../../domain/usecases/signup_use_case.dart';
 import '../../domain/usecases/logout_use_case.dart';
 
+import '../../../../core/config/mock_data_sources.dart';
+
 // Data Source Provider — typed as the abstract interface, not the implementation
 final authDataSourceProvider = Provider<AuthDataSource>((ref) {
-  final supabaseClient = ref.watch(supabaseClientProvider);
-  return SupabaseAuthDataSource(supabaseClient);
+  return MockAuthDataSource();
 });
 
 // Repository Provider

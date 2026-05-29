@@ -13,11 +13,13 @@ import '../../../booking/domain/entities/schedule_entity.dart';
 import '../../../booking/domain/entities/university_boarding_point_entity.dart';
 import '../../../booking/domain/entities/university_arrival_point_entity.dart';
 
+import '../../../../core/config/mock_data_sources.dart';
+
 part 'home_provider.g.dart';
 
 @riverpod
 HomeRemoteDataSource homeRemoteDataSource(Ref ref) {
-  return HomeRemoteDataSourceImpl(Supabase.instance.client);
+  return MockHomeRemoteDataSource();
 }
 
 @riverpod

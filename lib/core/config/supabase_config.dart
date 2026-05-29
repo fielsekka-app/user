@@ -8,13 +8,12 @@ class SupabaseConfig {
 
   /// Initialize Supabase client
   static Future<void> initialize() async {
-    if (!Env.isValid) {
-      throw Exception('Supabase configuration error: ${Env.validationError}');
-    }
+    final url = Env.supabaseUrl.isNotEmpty ? Env.supabaseUrl : 'https://dummy.supabase.co';
+    final anonKey = Env.supabaseAnonKey.isNotEmpty ? Env.supabaseAnonKey : 'dummyKey';
 
     await Supabase.initialize(
-      url: Env.supabaseUrl,
-      anonKey: Env.supabaseAnonKey,
+      url: url,
+      anonKey: anonKey,
       authOptions: FlutterAuthClientOptions(
         authFlowType: AuthFlowType.pkce,
         autoRefreshToken: true,

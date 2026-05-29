@@ -6,6 +6,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/services/storage_service.dart';
 import '../../../../core/providers/storage_provider.dart';
+import '../../../../core/config/mock_data_sources.dart';
 
 abstract class WalletRepository {
   Future<Either<Failure, double>> getBalance(String userId);
@@ -172,14 +173,9 @@ class WalletRepositoryImpl implements WalletRepository {
   }
 }
 
+
+
 // Provider
 final walletRepositoryProvider = Provider<WalletRepository>((ref) {
-  final supabase = Supabase.instance.client;
-  try {
-    // Attempt to watch the storage provider if it exists
-    final storageService = ref.watch(storageServiceProvider);
-    return WalletRepositoryImpl(supabase, storageService: storageService);
-  } catch (e) {
-    return WalletRepositoryImpl(supabase);
-  }
+  return MockWalletRepository();
 });

@@ -17,6 +17,7 @@ import '../../../booking/domain/entities/booking_entity.dart';
 import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../core/widgets/unified_calendar.dart';
+import '../../../../core/config/mock_data.dart';
 
 enum FullScreenView { bookingList, timeEditor }
 
@@ -146,7 +147,6 @@ class _FullScreenBookingViewState extends ConsumerState<FullScreenBookingView>
     setState(() => _isLoading = true);
 
     try {
-      final supabase = Supabase.instance.client;
       final bookingDate = _selectedDate.toIso8601String().split('T')[0];
 
       // Calculate price based on trip type
@@ -163,13 +163,13 @@ class _FullScreenBookingViewState extends ConsumerState<FullScreenBookingView>
       }
 
       AppLogger.info('Saving booking for user: ${currentUser.id}');
+      await Future.delayed(const Duration(milliseconds: 500)); // Simulate network latency
 
       if (_selectedBooking == null) {
-
-        await supabase.from('bookings').insert({
+        final newJson = {
+          'id': 'book_${DateTime.now().millisecondsSinceEpoch}',
           'user_id': currentUser.id,
           'subscription_id': widget.subscription.id,
-          // schedule_id is optional - not needed for subscription bookings
           'booking_date': bookingDate,
           'trip_type': _editingTripType,
           'pickup_station_id': widget.subscription.pickupStationId,
@@ -184,29 +184,23 @@ class _FullScreenBookingViewState extends ConsumerState<FullScreenBookingView>
           'split_preference': _splitPreference,
           'created_at': DateTime.now().toIso8601String(),
           'updated_at': DateTime.now().toIso8601String(),
-        });
-
+        };
+        MockData.bookings.add(newJson);
       } else {
-
-        final response = await supabase
-            .from('bookings')
-            .update({
-              'trip_type': _editingTripType,
-              'pickup_station_id': widget.subscription.pickupStationId,
-              'dropoff_station_id': widget.subscription.dropoffStationId,
-              'departure_time': _toDbTime(_editingDepartureTime),
-              'return_time': _toDbTime(_editingReturnTime),
-              'total_price': price,
-              'selection_type': _selectionType.toJson(),
-              'passenger_count': _passengerCount,
-              'split_preference': _splitPreference,
-              'updated_at': DateTime.now().toIso8601String(),
-            })
-            .eq('id', _selectedBooking!.id)
-            .select(); // Add .select() to get the updated row
-
-        if (response.isEmpty) {
-          AppLogger.warning('No rows were updated for booking ${_selectedBooking!.id}. Check RLS policies.');
+        final idx = MockData.bookings.indexWhere((element) => element['id'] == _selectedBooking!.id);
+        if (idx != -1) {
+          final updated = Map<String, dynamic>.from(MockData.bookings[idx]);
+          updated['trip_type'] = _editingTripType;
+          updated['pickup_station_id'] = widget.subscription.pickupStationId;
+          updated['dropoff_station_id'] = widget.subscription.dropoffStationId;
+          updated['departure_time'] = _toDbTime(_editingDepartureTime);
+          updated['return_time'] = _toDbTime(_editingReturnTime);
+          updated['total_price'] = price;
+          updated['selection_type'] = _selectionType.toJson();
+          updated['passenger_count'] = _passengerCount;
+          updated['split_preference'] = _splitPreference;
+          updated['updated_at'] = DateTime.now().toIso8601String();
+          MockData.bookings[idx] = updated;
         }
       }
 

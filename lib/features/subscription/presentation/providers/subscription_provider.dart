@@ -12,11 +12,13 @@ import '../../domain/usecases/create_subscription_use_case.dart';
 import '../../domain/usecases/get_active_subscription_use_case.dart';
 import '../../domain/usecases/cancel_subscription_use_case.dart';
 
+import '../../../../core/config/mock_data_sources.dart';
+
 part 'subscription_provider.g.dart';
 
 @riverpod
 SubscriptionDataSource subscriptionDataSource(Ref ref) {
-  return SubscriptionDataSourceImpl(Supabase.instance.client);
+  return MockSubscriptionDataSource();
 }
 
 @riverpod

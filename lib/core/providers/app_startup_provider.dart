@@ -16,10 +16,13 @@ final appStartupProvider = FutureProvider<void>((ref) async {
   LoggerService.info('Date formatting initialized');
 
   // 2. Validate compile-time environment variables
+  // Bypass validation to run in mock mode
+  /*
   if (!Env.isValid) {
     throw Exception(Env.validationError);
   }
-  LoggerService.info('Environment variables validated');
+  */
+  LoggerService.info('Environment variables validation bypassed');
 
   // 3. Initialize Supabase
   try {
