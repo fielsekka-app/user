@@ -1,11 +1,11 @@
 {
-    "name": "my_app",
-    "short_name": "my_app",
+    "name": "Fielsekka",
+    "short_name": "Fielsekka",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0F0F11",
+    "theme_color": "#CCFF00",
+    "description": "Fi El Sekka - تطبيق في السكة للركاب",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
