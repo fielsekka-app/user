@@ -340,7 +340,15 @@ class _BookingPageState extends ConsumerState<BookingPage> {
       );
     } else {
       // For Point-to-Point: Use schedules from ArrivalStationEntity
-      final schedules = state.selectedArrivalStation?.schedules ?? [];
+      // If no schedules from DB, fall back to mock times for demo purposes
+      const List<String> mockFallbackSchedules = [
+        '07:30',
+        '09:00',
+        '15:30',
+        '17:00',
+      ];
+      final rawSchedules = state.selectedArrivalStation?.schedules ?? [];
+      final schedules = rawSchedules.isEmpty ? mockFallbackSchedules : rawSchedules;
       final selectedTime = state.selectedDepartureTime ?? state.selectedReturnTime;
 
       return [
@@ -359,38 +367,25 @@ class _BookingPageState extends ConsumerState<BookingPage> {
                 isLadies: isLadies,
                 selectedTime: selectedTime != null ? _formatTime(selectedTime) : null,
                 icon: CupertinoIcons.clock,
-                onTap: schedules.isEmpty
-                    ? null
-                    : () {
-                        // For Point-to-Point, schedules are already strings like "HH:mm"
-                        final formattedSchedules =
-                            schedules.map((s) => _formatTime(s)).toList();
-                        _showTimePicker(
-                          title: AppLocalizations.of(context)!.tripTime,
-                          items: formattedSchedules,
-                          onSelect: (time) {
-                            if (time != null) {
-                              // Find original raw time
-                              final originalTime = schedules.firstWhere(
-                                (s) => _formatTime(s) == time,
-                              );
-                              bookingNotifier.selectDepartureTime(originalTime);
-                            }
-                          },
+                onTap: () {
+                  // For Point-to-Point, schedules are already strings like "HH:mm"
+                  final formattedSchedules =
+                      schedules.map((s) => _formatTime(s)).toList();
+                  _showTimePicker(
+                    title: AppLocalizations.of(context)!.tripTime,
+                    items: formattedSchedules,
+                    onSelect: (time) {
+                      if (time != null) {
+                        // Find original raw time
+                        final originalTime = schedules.firstWhere(
+                          (s) => _formatTime(s) == time,
                         );
-                      },
+                        bookingNotifier.selectDepartureTime(originalTime);
+                      }
+                    },
+                  );
+                },
               ),
-              if (schedules.isEmpty && state.selectedArrivalStation != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    AppLocalizations.of(context)!.noTripsAvailable,
-                    style: AppTheme.textTheme.bodySmall?.copyWith(
-                      color: Colors.red.withValues(alpha: 0.7),
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
             ],
           ),
         ),
