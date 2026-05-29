@@ -191,7 +191,7 @@ class _UnifiedCalendarWidgetState extends State<UnifiedCalendarWidget> {
         
         // Calendar Grid
         SizedBox(
-          height: 320,
+          height: 350,
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {
@@ -211,7 +211,7 @@ class _UnifiedCalendarWidgetState extends State<UnifiedCalendarWidget> {
               // Arabic week starts on Saturday. Let's map it:
               // Mon=1 -> 2, Tue=2 -> 3, Wed=3 -> 4, Thu=4 -> 5, Fri=5 -> 6, Sat=6 -> 0, Sun=7 -> 1
               final int mappedOffset = (monthDate.weekday + 1) % 7;
-
+ 
               return GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 physics: const NeverScrollableScrollPhysics(),
@@ -219,7 +219,7 @@ class _UnifiedCalendarWidgetState extends State<UnifiedCalendarWidget> {
                   crossAxisCount: 7,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
-                  childAspectRatio: 0.85,
+                  childAspectRatio: 1.0,
                 ),
                 itemCount: mappedOffset + daysInMonth,
                 itemBuilder: (context, gridIndex) {

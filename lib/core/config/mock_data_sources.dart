@@ -9,6 +9,7 @@ import 'package:fielsekkia_user/features/auth/data/models/user_model.dart';
 import 'package:fielsekkia_user/features/booking/data/datasources/booking_data_source.dart';
 import 'package:fielsekkia_user/features/booking/data/models/booking_model.dart';
 import 'package:fielsekkia_user/features/booking/domain/entities/booking_entity.dart';
+import 'package:fielsekkia_user/features/booking/domain/entities/schedule_entity.dart';
 import 'package:fielsekkia_user/features/home/data/datasources/home_remote_data_source.dart';
 import 'package:fielsekkia_user/features/home/data/models/arrival_station_model.dart';
 import 'package:fielsekkia_user/features/home/data/models/boarding_station_model.dart';
@@ -177,7 +178,21 @@ class MockHomeRemoteDataSource implements HomeRemoteDataSource {
 
   @override
   Future<List<RouteModel>> getRoutes(String universityId) async {
-    return MockData.routes.where((r) => r.universityId == universityId).toList();
+    final list = MockData.routes.where((r) => r.universityId == universityId).toList();
+    if (list.isEmpty) {
+      return [
+        RouteModel(
+          id: 'mock_route_fallback',
+          universityId: universityId,
+          routeNameAr: 'طريق افتراضي للجامعة',
+          routeNameEn: 'Default Route for University',
+          routeCode: 'MOCK-FALLBACK',
+          stationsOrder: const ['b1', 'ua1'],
+          isActive: true,
+        )
+      ];
+    }
+    return list;
   }
 
   @override
@@ -191,7 +206,52 @@ class MockHomeRemoteDataSource implements HomeRemoteDataSource {
 
   @override
   Future<List<ScheduleModel>> getSchedules(String routeId) async {
-    return MockData.schedules.where((s) => s.routeId == routeId).toList();
+    final list = MockData.schedules.where((s) => s.routeId == routeId).toList();
+    if (list.isEmpty) {
+      return [
+        const ScheduleModel(
+          id: 'mock_schedule_fallback_to',
+          routeId: 'mock_route_fallback',
+          direction: RouteDirection.toUniversity,
+          departureTime: '07:30',
+          daysOfWeek: [1, 2, 3, 4, 7],
+          capacity: 14,
+          pricePerTrip: 15.0,
+          isActive: true,
+        ),
+        const ScheduleModel(
+          id: 'mock_schedule_fallback_to_alt',
+          routeId: 'mock_route_fallback',
+          direction: RouteDirection.toUniversity,
+          departureTime: '09:00',
+          daysOfWeek: [1, 2, 3, 4, 7],
+          capacity: 14,
+          pricePerTrip: 15.0,
+          isActive: true,
+        ),
+        const ScheduleModel(
+          id: 'mock_schedule_fallback_from',
+          routeId: 'mock_route_fallback',
+          direction: RouteDirection.fromUniversity,
+          departureTime: '15:30',
+          daysOfWeek: [1, 2, 3, 4, 7],
+          capacity: 14,
+          pricePerTrip: 15.0,
+          isActive: true,
+        ),
+        const ScheduleModel(
+          id: 'mock_schedule_fallback_from_alt',
+          routeId: 'mock_route_fallback',
+          direction: RouteDirection.fromUniversity,
+          departureTime: '17:00',
+          daysOfWeek: [1, 2, 3, 4, 7],
+          capacity: 14,
+          pricePerTrip: 15.0,
+          isActive: true,
+        ),
+      ];
+    }
+    return list;
   }
 
   @override
