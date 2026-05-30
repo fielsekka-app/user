@@ -269,10 +269,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectPickupPoint => 'اختر محطة الركوب';
 
   @override
-  String get arrivalPoint => 'محطة الوصول';
+  String get arrivalPoint => 'وجهة السفر';
 
   @override
-  String get selectArrivalPoint => 'اختر محطة الوصول';
+  String get selectArrivalPoint => 'اختر وجهة السفر';
 
   @override
   String get emptyPickupStation => 'لا توجد محطة ركوب';

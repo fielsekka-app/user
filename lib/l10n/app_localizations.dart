@@ -605,13 +605,13 @@ abstract class AppLocalizations {
   /// No description provided for @arrivalPoint.
   ///
   /// In ar, this message translates to:
-  /// **'محطة الوصول'**
+  /// **'وجهة السفر'**
   String get arrivalPoint;
 
   /// No description provided for @selectArrivalPoint.
   ///
   /// In ar, this message translates to:
-  /// **'اختر محطة الوصول'**
+  /// **'اختر وجهة السفر'**
   String get selectArrivalPoint;
 
   /// No description provided for @emptyPickupStation.

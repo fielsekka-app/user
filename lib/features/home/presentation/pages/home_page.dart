@@ -1233,52 +1233,62 @@ class _LocationSelectionDrawerState
 
                           if (selectedPickupStationName != null) ...[
                             Divider(height: 1, color: Colors.grey.shade100, indent: 16, endIndent: 16),
-                            // Arrival Point Selection from Schedules
-                            Consumer(
-                              builder: (context, ref, _) {
-                                final destinationsAsync = ref.watch(availableDestinationsProvider((
-                                  originName: selectedPickupStationName!,
-                                  cityId: selectedCity!.id,
-                                )));
-
-                                return destinationsAsync.when(
-                                  data: (destinations) => _buildSelectionItem(
+                            // Destination City Selection (المدينة اللي المسافر رايح إليها)
+                            citiesAsync.when(
+                              data: (cities) {
+                                // استثني مدينة الانطلاق من قائمة الوجهات
+                                final destinationCities = cities
+                                    .where((c) => c.id != selectedCity?.id)
+                                    .toList();
+                                return _buildSelectionItem(
+                                  context,
+                                  ref,
+                                  title: l10n.arrivalPoint,
+                                  value: selectedArrivalStationName,
+                                  placeholder: l10n.selectArrivalPoint,
+                                  icon: CupertinoIcons.flag_fill,
+                                  onTap: () => _showPicker<CityEntity>(
                                     context,
                                     ref,
-                                    title: l10n.arrivalPoint,
-                                    value: selectedArrivalStationName,
-                                    placeholder: l10n.selectArrivalPoint,
-                                    icon: CupertinoIcons.flag_fill,
-                                    onTap: () => _showPicker<String>(
-                                      context,
-                                      ref,
-                                      title: l10n.selectArrivalPoint,
-                                      items: destinations,
-                                      labelBuilder: (name) => name,
-                                      onSelected: (name) {
-                                        setState(() {
-                                          selectedArrivalStationName = name;
-                                        });
-                                      },
-                                      emptyMessage: 'لا توجد وجهات متاحة حالياً من هذه المحطة',
+                                    title: l10n.selectArrivalPoint,
+                                    items: destinationCities,
+                                    labelBuilder: (city) => city.getLocalizedName(
+                                      ref.read(localeProvider).languageCode,
                                     ),
+                                    onSelected: (city) {
+                                      setState(() {
+                                        selectedArrivalStationName = city.getLocalizedName(
+                                          ref.read(localeProvider).languageCode,
+                                        );
+                                        selectedArrivalStation = ArrivalStationEntity(
+                                          id: 'city_dest_${city.id}',
+                                          nameAr: city.nameAr,
+                                          nameEn: city.nameEn,
+                                          pickupStationId: '',
+                                          price: 0,
+                                          schedules: const [],
+                                        );
+                                      });
+                                    },
+                                    emptyMessage: 'لا توجد وجهات متاحة حالياً',
                                   ),
-                                  loading: () => _buildSelectionItem(
-                                    context,
-                                    ref,
-                                    title: l10n.arrivalPoint,
-                                    value: null,
-                                    placeholder: l10n.loading,
-                                    icon: CupertinoIcons.flag_fill,
-                                    onTap: () {},
-                                    isLoading: true,
-                                    isEnabled: false,
-                                  ),
-                                  error: (err, stack) => Text('${l10n.error}: $err'),
                                 );
                               },
+                              loading: () => _buildSelectionItem(
+                                context,
+                                ref,
+                                title: l10n.arrivalPoint,
+                                value: null,
+                                placeholder: l10n.loading,
+                                icon: CupertinoIcons.flag_fill,
+                                onTap: () {},
+                                isLoading: true,
+                                isEnabled: false,
+                              ),
+                              error: (err, stack) => Text('${l10n.error}: $err'),
                             ),
                           ],
+
                         ] else ...[
                           // --- UNIVERSITY FLOW ---
                           // 1. City Selection
