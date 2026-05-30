@@ -665,7 +665,7 @@ abstract class AppLocalizations {
   /// No description provided for @stationToStation.
   ///
   /// In ar, this message translates to:
-  /// **'من موقف لموقف'**
+  /// **'رحلات'**
   String get stationToStation;
 
   /// No description provided for @forUniversity.

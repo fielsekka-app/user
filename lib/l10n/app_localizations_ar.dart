@@ -299,7 +299,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectLocationSubAlt => 'حدد المدينة، محطة الركوب، والوصول';
 
   @override
-  String get stationToStation => 'من موقف لموقف';
+  String get stationToStation => 'رحلات';
 
   @override
   String get forUniversity => 'للجامعة';
