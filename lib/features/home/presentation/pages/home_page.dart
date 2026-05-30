@@ -965,15 +965,11 @@ class _LocationSelectionDrawerState
         ? ref.watch(universityBoardingPointsProvider(selectedCity!.id))
         : const AsyncValue.data(<UniversityBoardingPointEntity>[]);
 
-    final uniArrivalPointsAsync = (isToUniversity && selectedUniversity != null)
-        ? ref.watch(universityArrivalPointsProvider(selectedUniversity!.id))
-        : const AsyncValue.data(<UniversityArrivalPointEntity>[]);
 
     final bool isComplete = isToUniversity
         ? (selectedUniversity != null && 
            selectedCity != null && 
-           selectedUniBoardingPoint != null && 
-           selectedUniArrivalPoint != null)
+           selectedUniBoardingPoint != null)
         : (selectedCity != null &&
            selectedPickupStationName != null &&
            selectedArrivalStationName != null);
@@ -1564,25 +1560,6 @@ class _LocationSelectionDrawerState
                                       }
                                     });
                                   },
-                                  showAddOption: true,
-                                  addOptionLabel: 'إضافة جامعة غير موجودة',
-                                  onAddSubmit: (String val) {
-                                    setState(() {
-                                      selectedUniversity = UniversityEntity(
-                                        id: 'custom_${DateTime.now().millisecondsSinceEpoch}',
-                                        nameAr: val,
-                                        nameEn: val,
-                                        cityId: '',
-                                        isActive: true,
-                                        location: const Location(
-                                          latitude: 0,
-                                          longitude: 0,
-                                          address: '',
-                                        ),
-                                      );
-                                      selectedUniArrivalPoint = null;
-                                    });
-                                  },
                                 ),
                               ),
                               loading: () => _buildSelectionItem(
@@ -1598,46 +1575,6 @@ class _LocationSelectionDrawerState
                               ),
                               error: (err, stack) =>
                                   Text('${l10n.error}: $err'),
-                            ),
-                          ],
-
-                          if (selectedUniversity != null) ...[
-                            Divider(height: 1, color: Colors.grey.shade100, indent: 16, endIndent: 16),
-                            // 4. Arrival Point Selection
-                            uniArrivalPointsAsync.when(
-                              data: (points) => _buildSelectionItem(
-                                context,
-                                ref,
-                                title: 'نقطة الوصول',
-                                value: selectedUniArrivalPoint?.nameAr,
-                                placeholder: 'اختر نقطة الوصول داخل الجامعة',
-                                icon: CupertinoIcons.flag_circle_fill,
-                                onTap: () => _showPicker<UniversityArrivalPointEntity>(
-                                  context,
-                                  ref,
-                                  title: 'اختر نقطة الوصول',
-                                  items: points,
-                                  labelBuilder: (p) => p.nameAr,
-                                  onSelected: (p) {
-                                    setState(() {
-                                      selectedUniArrivalPoint = p;
-                                    });
-                                  },
-                                  emptyMessage: 'لا يوجد نقاط وصول متاحة لهذه الجامعة حالياً',
-                                ),
-                              ),
-                              loading: () => _buildSelectionItem(
-                                context,
-                                ref,
-                                title: 'نقطة الوصول',
-                                value: null,
-                                placeholder: l10n.loading,
-                                icon: CupertinoIcons.flag_circle_fill,
-                                onTap: () {},
-                                isLoading: true,
-                                isEnabled: false,
-                              ),
-                              error: (err, stack) => Text('${l10n.error}: $err'),
                             ),
                           ],
                         ],
